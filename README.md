@@ -76,7 +76,7 @@ else print' (eval' input) >> loop'
 We simply check if the input equals `":quit"`, in which case we exit our REPL. Otherwise, we evaluate the input, 
 print the result and restart the loop. 
 
-### Glueing it all together
+### Putting it all together
 
 Finally, let's go ahead and put everything together inside our `main` entry point:
 ```Haskell
@@ -89,14 +89,45 @@ main = do
 ```
 First, the input string is extracted from the `IO String` value returned by our `read'` function, using the `<-` operator. It is then passed on to the looping logic which we defined earlier. The `unless` function here works exactly like our `if`/`else` logic in the previous code. It will exit the program if `input == ":quit"`.
 
-So there we have it! A very simple, albeit rather useless REPL.
+So there we have it! A very simple, albeit rather useless REPL. You can find the complete code example in [Repl.hs](Repl.hs).
+
 
 ## Running the REPL
-> Todo
+Compile the code by running `ghc -o repl Repl.hs`. Then start, and test out the REPL by running `./repl`. It should look something like this:
+```bash
+$ ghc -o repl Repl.hs
+[2 of 2] Compiling Main             ( Repl.hs, Repl.o )
+Linking repl ...
+
+$ ./repl
+REPL> Hello REPL
+Hello REPL
+REPL> 1,2,3,🍌
+1,2,3,🍌
+REPL> :quit
+$
+```
+Due to the simple implementation of the `eval'` function, the REPL just repeats whatever is typed. 
+
+The basic framework is however in place, and the type of evaluator that we place inside it will more or less determine the main purpose of the REPL.
 
 ## Playing around with evaluators
-> Todo!
+There are a few examples of evaluators in the `EvaluatorExamples.hs` file. You can try them out by calling them from the `eval'` function:
+```Haskell
+eval' :: String -> String
+eval' input = simpleCalc input
+```
+This one turns your REPL into a very simple calculator. As we can see, the number of possibilities are endless when it comes to the types of REPLs you can create by simple changing the evaluator.
 
+Going back to the main use cases of REPLs, you can even add in the evaluator of your own programming language here and create an interactive shell for your language. For that you might also want a custom parser in the `read'` step though, so that the evaluator can work on a well defined data structure rather than a string.
 
 ## Additional functionality
-> Todo!
+The fully fleshed out REPLs that come bundled with programming language toolkits, usually have a whole list of additional features and extra functionality. Even though these will not be covered in this tutorial, most of them are quite simple to implement and can easily be composed into this REPL just like what we did with the four initial steps. A few examples are:
+  - See a history of inputs and outputs.
+  - Set variables that can be accessed and used in later commands to the REPL.
+  - Special commands for debugging and error handling.
+
+## Final thoughts
+There are many different tools and libraries out there for creating really powerful REPLs with lots of different features. One such example being [parsec](https://hackage.haskell.org/package/parsec), a library containing a lot of functionality useful for reading and parsing input effectively. 
+
+The main purpose of this tutorial is however to provide a basic understanding of how REPLs work under the hood, and to show how simple it is to create and assemble the four main building blocks that constitute a Read-eval-print-loop.
