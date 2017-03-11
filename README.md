@@ -119,7 +119,7 @@ There are a few examples of evaluators in the [EvaluatorExamples.hs](EvaluatorEx
 eval' :: String -> String
 eval' input = simpleCalc input
 ```
-This one turns your REPL into a very simple calculator. As we can see, the number of possibilities are endless when it comes to the types of REPLs you can create by simple changing the evaluator.
+This one turns our REPL into a very simple calculator. As we can see, the number of possibilities are endless when it comes to the types of REPLs you can create by simple changing the evaluator.
 
 Going back to the main use cases of REPLs, you can even add in the evaluator of your own programming language here and create an interactive shell for your language. For that you might also want a custom parser in the `read'` step though, so that the evaluator can work on a well defined data structure rather than a string.
 
