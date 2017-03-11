@@ -1,4 +1,4 @@
-import           Control.Monad
+import           Control.Monad (unless)
 import           Evaluators
 import           System.IO
 
@@ -7,22 +7,21 @@ main = do
   input <- read'
 
   unless (input == ":quit")
-       $ eval' input
-     >>= print'
-      >> main
+       $ print' (eval' input)
+       >> main
+
 
 read' :: IO String
 read' = putStr "REPL> "
-      >> hFlush System.IO.stdout
+      >> hFlush stdout
       >> getLine
 
-eval' :: String -> IO String
-eval' =
-  return
+eval' :: String -> String
+eval' input = input
   -- Try the following ones from `Evaluators.hs`:
-  -- return . capitalizer
-  -- return . simpleCalc
-  -- return . emojifyer
+  -- capitalizer input
+  -- simpleCalc input
+  -- emojifyer input
 
 print' :: String -> IO ()
-print' = putStrLn
+print' = putStr
