@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Build
+#
+# Running `./build` will build the REPL executable,
+# which you can then access by running `./repl`
+#
+
+ghc -o repl Repl.hs

@@ -1,5 +1,5 @@
-import           Control.Monad (unless)
-import           Evaluators
+import           Control.Monad     (unless)
+import           EvaluatorExamples
 import           System.IO
 
 main :: IO ()
@@ -8,20 +8,23 @@ main = do
 
   unless (input == ":quit")
        $ print' (eval' input)
-       >> main
+      >> main
 
 
 read' :: IO String
 read' = putStr "REPL> "
-      >> hFlush stdout
-      >> getLine
+     >> hFlush stdout
+     >> getLine
+
 
 eval' :: String -> String
-eval' input = input
-  -- Try the following ones from `Evaluators.hs`:
+eval' input =
+  input
+  -- Try the following ones from `EvaluatorExamples.hs`:
   -- capitalizer input
   -- simpleCalc input
-  -- emojifyer input
+  -- emojiFinder input
+
 
 print' :: String -> IO ()
-print' = putStr
+print' = putStrLn

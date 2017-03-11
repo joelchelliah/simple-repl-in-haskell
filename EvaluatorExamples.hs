@@ -1,4 +1,4 @@
-module Evaluators where
+module EvaluatorExamples where
 
 import           Data.Char
 
@@ -25,13 +25,13 @@ simpleCalc expr =
 
 
 -- Finds emojis related to the given input
-emojifyer :: String -> String
-emojifyer expr
-  | foundIn ["smile", "face"] = "😀 😃 😄 😁 😆 😅 😂"
-  | foundIn ["car", "transport"] = "🚗 🚕 🚙 🏎 🚓 🚑"
-  | foundIn ["cat", "meow", "purr"] = "😺 😸 😻 😼 🙀"
-  | foundIn ["ball", "sport"] = "⚽️ 🏀 🏈 ⚾️ 🎾 🎱"
-  | foundIn ["food"] = "🍏 🍎 🍐 🍊 🍋 🍌 🍉 🍇 🍓 🍒 🍑"
-  | otherwise = "👾⁉️"
+emojiFinder :: String -> String
+emojiFinder expr
+  | foundIn ["smile", "face"] = "😀  😃  😄  😁  😆  😅  😂"
+  | foundIn ["car", "transport"] = "🚗  🚕  🚙  🏎  🚓  🚑"
+  | foundIn ["cat", "meow", "purr"] = "😺  😸  😻  😼  🙀"
+  | foundIn ["ball", "sport"] = "⚽️  🏀  🏈  ⚾️  🎾  🎱"
+  | foundIn ["food"] = "🍏  🍎  🍐  🍊  🍋  🍌  🍉  🍇  🍓  🍒  🍑"
+  | otherwise = "👾  ⁉️"
   where foundIn list = (`elem` list) `any` keywords
         keywords = words expr
