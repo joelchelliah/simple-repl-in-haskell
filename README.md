@@ -10,19 +10,19 @@ the example code.
 ## What's a REPL
 REPL stands for Read-Eval-Print-Loop, and as the name implies, its job is to:
   1. **Read** the given input, and parse it into a data structure that can be evaluated.
-  2. **Evaluate** the parsed expression, based on some set of rules or logic.
-  3. **Print** the result of the evaluated epxression.
+  2. **Evaluate** the parsed expression, based on a set of rules.
+  3. **Print** the result of the evaluated expression.
   4. **Repeat** (loop) until signaled to stop.
 
 REPLs are most commonly associated with programming languages, where they are used as an interactive 
 shell for interpreting the code written that language. Most languages often come with such REPLs already bundled 
 into their toolkit (e.g. Ruby's [IRB](https://en.wikipedia.org/wiki/Interactive_Ruby_Shell), or Haskell's [GHCi](https://wiki.haskell.org/GHC/GHCi)). 
-These days, there's also an evergrowing number of online REPLs that support several different languages, 
+These days, there's also an ever-growing number of online REPLs that support several different languages, 
 such as [repl.it](https://repl.it/site/about). 
 
 In these cases, the **read** and **evaluate** parts are focused around interpreting the input 
-based on the language that provides the REPL. However, stricly speaking, a REPL doesn't necessarily have 
-to be connected to a fully fleshed out programming language (or any language at all). Although that is its
+based on the language providing the REPL. However, a REPL doesn't necessarily have 
+to be connected to a fully fleshed out programming language (or any language at all). Although that is the
 most common use case, one can argue that a REPL can pretty much be anything you want it to be, as long as 
 it can **read**, **evaluate** and **print** whatever you throw at it in a repeating **loop**. 
 
@@ -30,7 +30,7 @@ So by that definition, let's get started on creating our very own, very simple, 
 
 
 ## How to make a REPL
-As stated earlier, a REPL consists of four steps. We will start by implementing each of these steps as seperate functions and finally compose them together to create our REPL.
+As stated earlier, a REPL consists of four steps. We will start by implementing each of these steps as separate functions and finally compose them together to create our REPL.
 
 ### Read
 The first step is reading and parsing the input. Since we want to keep things simple, we'll ignore the parsing bit and stick to just reading the input in as a regular string:
@@ -38,7 +38,7 @@ The first step is reading and parsing the input. Since we want to keep things si
 read' :: IO String
 read' =  getLine
 ```
-For this, all we need is the `getLine` function. This will read the input and return it as an `IO String`. The `IO` wrapper is there to indicate that the string was produced by an IO action, which in this case is some input provided by the user. 
+For this, all we need is the `getLine` function. This will read the input and return it as an `IO String`. The `IO` wrapper is there to indicate that the string was produced by an IO action (i.e. input/output), which in this case is some input provided by the user. 
 
 Note that the *tick* in the name of our `read'` function has no special purpose other than to differentiate it from Haskell's built-in `read` function.
 
@@ -52,7 +52,7 @@ read' = putStr "REPL> "
 We've added two additional actions here: `putStr "REPL> "` simply prints **REPL>** at the start of the prompt, and `hFlush stdout` is to immediately flush the stream just to make sure that nothing is stuck in the buffers. Finally we combine all three IO actions together with the `>>` sequencing operator (which you can read as *and-then*).
 
 ### Eval
-The next step is to evaluate the input that we have read. The easiest implementation would be to just skip this part entirely, and let the function just return its given input. Let's do that for now:
+The next step is to evaluate the input that we have read. The easiest implementation would be to just skip this part entirely, and let the function return its given input. So let's do that for now:
 ```Haskell
 eval' :: String -> String
 eval' input = input
@@ -73,7 +73,7 @@ if (input == ":quit")
 then return ()
 else print' (eval' input) >> loop'
 ```
-We simply check if the input equals `":quit"`, in which case we exit our REPL. Otherwise, we evaluate the input, 
+Here, we simply check if the input equals `":quit"`, in which case we exit our REPL. Otherwise, we evaluate the input, 
 print the result and restart the loop. 
 
 ### Putting it all together
@@ -87,7 +87,9 @@ main = do
   unless (input == ":quit")
        $ print' (eval' input) >> main
 ```
-First, the input string is extracted from the `IO String` value returned by our `read'` function, using the `<-` operator. It is then passed on to the looping logic which we defined earlier. The `unless` function here works exactly like our `if`/`else` logic in the previous code. It will exit the program if `input == ":quit"`.
+Firstly, the input string is extracted from the `IO String` value coming from our `read'` function, using the `<-` operator. It's then passed on to the looping logic we defined earlier.
+
+The `unless` function here works exactly like our `if`/`else` logic in the previous code. It will exit the program if `input == ":quit"`.
 
 So there we have it! A very simple, albeit rather useless REPL. You can find the complete code example in the [Repl.hs](Repl.hs) file.
 
@@ -122,12 +124,14 @@ This one turns your REPL into a very simple calculator. As we can see, the numbe
 Going back to the main use cases of REPLs, you can even add in the evaluator of your own programming language here and create an interactive shell for your language. For that you might also want a custom parser in the `read'` step though, so that the evaluator can work on a well defined data structure rather than a string.
 
 ## Additional functionality
-The fully fleshed out REPLs that come bundled with programming language toolkits, usually have a whole list of additional features and extra functionality. Even though these will not be covered in this tutorial, most of them are quite simple to implement and can easily be composed into this REPL just like what we did with the four initial steps. A few examples are:
+The fully fleshed out REPLs that come bundled with programming language toolkits, usually have a considerable list of additional features and extra functionality. Even though these will not be covered in this tutorial, most of them are quite simple to implement and can easily be composed into this REPL just like what we did with the four initial steps. A few examples are:
   - See a history of inputs and outputs.
   - Set variables that can be accessed and used in later commands to the REPL.
   - Special commands for debugging and error handling.
+  
+Take a moment to consider how these features could be incorporated into out current REPL.
 
 ## Final thoughts
-There are many different tools and libraries out there for creating really powerful REPLs with lots of different features. One such example being [parsec](https://hackage.haskell.org/package/parsec), a library containing a lot of functionality useful for reading and parsing input effectively. 
+There are many different tools and libraries out there for creating really powerful REPLs with lots of different features. One such example being [parsec](https://hackage.haskell.org/package/parsec), a library containing a handful of useful functionality for reading and parsing input effectively. 
 
 The main purpose of this tutorial is however to provide a basic understanding of how REPLs work under the hood, and to show how simple it is to create and assemble the four main building blocks that constitute a Read-eval-print-loop.
