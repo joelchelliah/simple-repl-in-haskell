@@ -89,7 +89,7 @@ main = do
 ```
 First, the input string is extracted from the `IO String` value returned by our `read'` function, using the `<-` operator. It is then passed on to the looping logic which we defined earlier. The `unless` function here works exactly like our `if`/`else` logic in the previous code. It will exit the program if `input == ":quit"`.
 
-So there we have it! A very simple, albeit rather useless REPL. You can find the complete code example in [Repl.hs](Repl.hs).
+So there we have it! A very simple, albeit rather useless REPL. You can find the complete code example in the [Repl.hs](Repl.hs) file.
 
 
 ## Running the REPL
@@ -112,7 +112,7 @@ Due to the simple implementation of the `eval'` function, the REPL just repeats 
 The basic framework is however in place, and the type of evaluator that we place inside it will more or less determine the main purpose of the REPL.
 
 ## Playing around with evaluators
-There are a few examples of evaluators in the `EvaluatorExamples.hs` file. You can try them out by calling them from the `eval'` function:
+There are a few examples of evaluators in the [EvaluatorExamples.hs](EvaluatorExamples.hs) file. You can try them out by calling them from the `eval'` function:
 ```Haskell
 eval' :: String -> String
 eval' input = simpleCalc input
