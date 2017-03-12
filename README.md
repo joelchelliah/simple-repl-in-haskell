@@ -1,7 +1,7 @@
 # simple-repl-in-haskell
-> How to make you very own REPL in Haskell
+> How to make your very own REPL in Haskell
 
-This is a simple step-by-step tutorial on how to create a very simple **REPL** in Haskell. 
+This is a simple step-by-step tutorial on how to create a very simple **REPL** in Haskell. The goal of this walkthrough is to provide a basic understanding of REPLs and how simple it can be to create one, by individually constructing its four main components, and then composing them together.
 
 Prior knowledge or experience with Haskell is not required to grasp the basic principles of this walkthrough, 
 although some basic understanding of functional programming will probably make it a lot easier to understand 
@@ -89,7 +89,7 @@ main = do
 ```
 Firstly, the input string is extracted from the `IO String` value coming from our `read'` function, using the `<-` operator. It's then passed on to the looping logic we defined earlier.
 
-The `unless` function here works exactly like our `if`/`else` logic in the previous code. It will exit the program if `input == ":quit"`.
+The `unless` function here works exactly like our `if`/`else` logic in the previous code. It will exit the program if `input == ":quit"`. The `$` is the *apply operator*, which is used here to avoid wrapping the right side in extra parentheses.
 
 So there we have it! A very simple, albeit rather useless REPL. You can find the complete code example in the [Repl.hs](Repl.hs) file.
 
