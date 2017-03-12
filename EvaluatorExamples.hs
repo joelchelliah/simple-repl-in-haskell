@@ -1,6 +1,7 @@
 module EvaluatorExamples where
 
 import           Data.Char
+import           Data.List
 
 -- Some simple evaluator examples:
 
@@ -33,5 +34,5 @@ emojiFinder expr
   | foundIn ["ball", "sport"] = "⚽️  🏀  🏈  ⚾️  🎾  🎱"
   | foundIn ["food"] = "🍏  🍎  🍐  🍊  🍋  🍌  🍉  🍇  🍓  🍒  🍑"
   | otherwise = "👾  ⁉️"
-  where foundIn list = (`elem` list) `any` keywords
+  where foundIn  = not . null . intersect keywords
         keywords = words expr
