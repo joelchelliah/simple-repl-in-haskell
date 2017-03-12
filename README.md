@@ -12,10 +12,10 @@ REPL stands for Read-Eval-Print-Loop, and as the name implies, its job is to:
   1. **Read** the given input, and parse it into a data structure that can be evaluated.
   2. **Evaluate** the parsed expression, based on a set of rules.
   3. **Print** the result of the evaluated expression.
-  4. **Repeat** (loop) until signaled to stop.
+  4. **Loop** (repeat) until signaled to stop.
 
 REPLs are most commonly associated with programming languages, where they are used as an interactive 
-shell for interpreting the code written that language. Most languages often come with such REPLs already bundled 
+shell for interpreting the code written in that language. Most languages often come with such REPLs already bundled 
 into their toolkit (e.g. Ruby's [IRB](https://en.wikipedia.org/wiki/Interactive_Ruby_Shell), or Haskell's [GHCi](https://wiki.haskell.org/GHC/GHCi)). 
 These days, there's also an ever-growing number of online REPLs that support several different languages, 
 such as [repl.it](https://repl.it/site/about). 
