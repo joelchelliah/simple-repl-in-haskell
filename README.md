@@ -7,6 +7,8 @@ Prior knowledge or experience with Haskell is not required to grasp the basic pr
 although some basic understanding of functional programming will probably make it a lot easier to understand 
 the example code.
 
+This tutorial has also been published as a [blog post on open.bekk.no](http://open.bekk.no/creating-a-repl-in-haskell).
+
 ## What's a REPL
 REPL stands for Read-Eval-Print-Loop, and as the name implies, its job is to:
   1. **Read** the given input, and parse it into a data structure that can be evaluated.
