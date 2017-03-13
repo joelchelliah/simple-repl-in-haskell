@@ -33,7 +33,7 @@ So by that definition, let's get started on creating our very own, very simple, 
 As stated earlier, a REPL consists of four steps. We will start by implementing each of these steps as separate functions and finally compose them together to create our REPL.
 
 ### Read
-The first step is reading and parsing the input. Since we want to keep things simple, we'll ignore the parsing bit and stick to just reading the input in as a regular string:
+The first step is reading and parsing the input. Since we want to keep things simple, we'll ignore the parsing bit and stick to just reading the input as a regular string:
 ```Haskell
 read' :: IO String
 read' =  getLine
@@ -49,7 +49,7 @@ read' = putStr "REPL> "
      >> hFlush stdout
      >> getLine
 ```
-We've added two additional actions here: `putStr "REPL> "` simply prints **REPL>** at the start of the prompt, and `hFlush stdout` is to immediately flush the stream just to make sure that nothing is stuck in the buffers. Finally we combine all three IO actions together with the `>>` sequencing operator (which you can read as *and-then*).
+We've added two additional actions here: `putStr "REPL> "` simply prints **REPL>** at the start of the prompt, and `hFlush stdout` is to immediately flush the stream just to make sure that nothing is stuck in the buffers. Finally we combine all three IO actions together with the `>>` operator (which you can read as *and-then*).
 
 ### Eval
 The next step is to evaluate the input that we have read. The easiest implementation would be to just skip this part entirely, and let the function return its given input. So let's do that for now:
