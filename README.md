@@ -1,7 +1,7 @@
 # simple-repl-in-haskell
 > How to make your very own REPL in Haskell
 
-This is a simple step-by-step tutorial on how to create a very simple **REPL** in Haskell. The goal of this walkthrough is to provide a basic understanding of REPLs and how simple it can be to create one, by individually constructing its four main components, and then composing them together.
+This is a step-by-step tutorial on how to create a very simple **REPL** in Haskell. The goal of this walkthrough is to provide a basic understanding of REPLs and to show how easy and straightforward it can be to build one. We will create our REPL by individually constructing its four main components, and then composing them together.
 
 Prior knowledge or experience with Haskell is not required to grasp the basic principles of this walkthrough, 
 although some basic understanding of functional programming will probably make it a lot easier to understand 
